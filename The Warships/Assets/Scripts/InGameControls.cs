@@ -12,12 +12,11 @@ public class InGameControls : MonoBehaviour {
     public Camera camBack;
     public static short currentCamera = 0; // 0 - Main, 1 - Front, 2 - Right, 3 - Back, 4 - Left
 
-
     // Dugmad u igri
     public GameObject buttonFireMode;
     public GameObject buttonsInFireMode;
     public Button buttonFireInFireMode;
-    public float reloadingTime;
+    public float reloadingTime = 3;
 
     // Varijable za ispaljivanje topova
     public GameObject cannonBall;
@@ -37,11 +36,10 @@ public class InGameControls : MonoBehaviour {
     // Provjera da li igrac moze pucati
     private float []cannonTimeBeg;
     private float []cannonTimeEnd;
-    
 
     // Use this for initialization
     void Start () {
-        reloadingTime = 15f;
+        reloadingTime = 3;
         cannonTimeBeg = new float[4];
         cannonTimeEnd = new float[4];
     }

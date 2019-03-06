@@ -11,6 +11,9 @@ public class BoatScriptController : MonoBehaviour
     public float windForce;
     private bool windMode = false;
 
+    public float bombDamage = 10f;
+    public GameObject bomb;
+
     private Rigidbody rb;
 
     float verticalInput;
@@ -50,5 +53,10 @@ public class BoatScriptController : MonoBehaviour
     {
         rb.AddRelativeForce(Vector3.forward * windForce,ForceMode.Acceleration);
         Debug.Log("Velocity: " + rb.velocity);
+    }
+
+    public void releseBomb()
+    {
+        Instantiate(bomb, this.transform.Find("SpotForBombs").transform.position, this.transform.rotation);
     }
 }

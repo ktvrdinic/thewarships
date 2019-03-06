@@ -26,32 +26,31 @@ public class CannonsRotate : MonoBehaviour {
         // MOZDA DOVESTI STATIC VARIJABLE U OVU KLASU
         if (left || right || up || down)
         {
-
+            
             switch (InGameControls.currentCamera)
             {
                 case 1: // Front camera
+                    if (cannonFront.transform.localEulerAngles.z != 0) cannonFront.transform.localEulerAngles = new Vector3(cannonFront.transform.localEulerAngles.x, cannonFront.transform.localEulerAngles.y, 0);
+
                     if (left == true && (cannonFront.transform.localEulerAngles.y > (360 - MaxRotRightLeft) || cannonFront.transform.localEulerAngles.y < MaxRotRightLeft+2))
-                    { 
-                        cannonFront.transform.Rotate(0, -RotSpeed * Time.deltaTime, 0);
-                        
+                    {
+                        cannonFront.transform.Rotate(0, -RotSpeed * Time.deltaTime, 0);                        
                     }
                     else if (right == true && (cannonFront.transform.localEulerAngles.y > (358 - MaxRotRightLeft) || cannonFront.transform.localEulerAngles.y <  MaxRotRightLeft))
                     {
-                        cannonFront.transform.Rotate(0, RotSpeed * Time.deltaTime, 0);
-                        
+                        cannonFront.transform.Rotate(0, RotSpeed * Time.deltaTime, 0);                        
                     } else if (up == true && (cannonFront.transform.localEulerAngles.x > (360 - MaxRotUpDown) || cannonFront.transform.localEulerAngles.x < MaxRotUpDown+2))
-                    {                        
+                    {
                         cannonFront.transform.Rotate(-RotSpeed * Time.deltaTime, 0, 0);
-                        
-                        
                     }
                     else if (down == true && (cannonFront.transform.localEulerAngles.x > (358 - MaxRotUpDown) || cannonFront.transform.localEulerAngles.x < MaxRotUpDown))
                     {
                         cannonFront.transform.Rotate(RotSpeed * Time.deltaTime, 0, 0);
-                        
                     }
-                    break;
+                    break; 
                 case 2: // Right camera
+                    if (cannonRight.transform.localEulerAngles.x != 0) cannonRight.transform.localEulerAngles = new Vector3(0, cannonRight.transform.localEulerAngles.y, cannonRight.transform.localEulerAngles.z);
+
                     if (left == true && (cannonRight.transform.localEulerAngles.y > (360 - MaxRotRightLeft) || cannonRight.transform.localEulerAngles.y < MaxRotRightLeft+2))
                     {
                         cannonRight.transform.Rotate(0, -RotSpeed * Time.deltaTime, 0);
@@ -72,10 +71,11 @@ public class CannonsRotate : MonoBehaviour {
                     }
                     break;
                 case 3: // Back camera
+                    if (cannonBack.transform.localEulerAngles.z != 0) cannonBack.transform.localEulerAngles = new Vector3(cannonBack.transform.localEulerAngles.x, cannonBack.transform.localEulerAngles.y, 0);
+
                     if (left == true && (cannonBack.transform.localEulerAngles.y > (360 - MaxRotRightLeft) || cannonBack.transform.localEulerAngles.y < MaxRotRightLeft+2))
                     {
-                        cannonBack.transform.Rotate(0, -RotSpeed * Time.deltaTime, 0);
-                        
+                        cannonBack.transform.Rotate(0, -RotSpeed * Time.deltaTime, 0);                        
                     }
                     else if (right == true && (cannonBack.transform.localEulerAngles.y > (358 - MaxRotRightLeft) || cannonBack.transform.localEulerAngles.y < MaxRotRightLeft))
                     {
@@ -94,6 +94,8 @@ public class CannonsRotate : MonoBehaviour {
                     }
                     break;
                 case 4: // Left camera
+                    if (cannonLeft.transform.localEulerAngles.x != 0) cannonLeft.transform.localEulerAngles = new Vector3(0, cannonLeft.transform.localEulerAngles.y, cannonLeft.transform.localEulerAngles.z);
+
                     if (left == true && (cannonLeft.transform.localEulerAngles.y > (360 - MaxRotRightLeft) || cannonLeft.transform.localEulerAngles.y < MaxRotRightLeft + 2))
                     {
                         cannonLeft.transform.Rotate(0, -RotSpeed * Time.deltaTime, 0);
@@ -115,9 +117,8 @@ public class CannonsRotate : MonoBehaviour {
                         
                     }
                     break;
-
                 default:
-                    Debug.Log("Ne mogu pronaci trenutni top.");
+                        Debug.Log("Ne mogu pronaci trenutni top.");
                     break;
             }
 
