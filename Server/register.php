@@ -16,7 +16,7 @@
 		exit();
 	}
 	
-	$stmt = $conn->prepare("INSERT INTO users(username, email, lozinka) VALUES (?,?,?)");
+	$stmt = $conn->prepare("INSERT INTO users(username, email, password) VALUES (?,?,?)");
 	$passwordHASH = password_hash($password, PASSWORD_DEFAULT);
 	$stmt->bind_param("sss", $username, $email, $passwordHASH);
 	$stmt->execute() or die("4: Insert player query failed");
