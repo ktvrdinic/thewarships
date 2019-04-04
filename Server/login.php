@@ -21,7 +21,21 @@
 		exit();
 	}
 
-	$stmt = $conn->prepare("SELECT username, password, no_ships, gold, rum, wood, pearl, experience, level, no_victory, no_lose FROM users WHERE username=?;");
+	$stmt = $conn->prepare("SELECT `username`, (SELECT tier FROM ships WHERE name like user_ship.shipName) as tier,`no_cannons`, `speed`, `strength`, `turn_speed`, `singleCannonDmg`, `shipName` FROM `user_ship` WHERE username like ? ORDER BY tier ASC;");
+	$stmt->bind_param("s", $existinginfo["username"]);
+	$stmt->execute() or die("8: Ship check query failed");
+	$result = $stmt->get_result();
+	$stmt->close();
+
+	echo "0_".$existinginfo["username"]."_".$existinginfo["no_ships"]."_".$existinginfo["gold"]."_".$existinginfo["rum"]."_".$existinginfo["wood"]."_".$existinginfo["pearl"]."_".$existinginfo["experience"]."_".$existinginfo["level"]."_".$existinginfo["no_victory"]."_".$existinginfo["no_lose"]."|";
 	
-    echo "0\t".$existinginfo["username"]."\t".$existinginfo["no_ships"]."\t".$existinginfo["gold"]."\t".$existinginfo["rum"]."\t".$existinginfo["wood"]."\t".$existinginfo["pearl"]."\t".$existinginfo["experience"]."\t".$existinginfo["level"]."\t".$existinginfo["no_victory"]."\t".$existinginfo["no_lose"];
+	if($result->num_rows < 1){
+		echo "9: User don't have ships";
+		exit();
+	}
+
+	while ($row = $result->fetch_assoc()) {
+			echo $row["shipName"]."_".$row["tier"]."_".$row["no_cannons"]."_".$row["speed"]."_".$row["strength"]."_".$row["turn_speed"]."_".$row["singleCannonDmg"]."|";
+	}
+	
 ?>

@@ -1,31 +1,71 @@
 <?php
 	require ('inc_conn.php');
-    
 	
-	
-	if(isset($_POST["winner"])){
-		
+	if(isset($_POST["username_enemy"])){
 		// Dodati varijable koje bi spremili
 		$username = mysqli_real_escape_string($conn, $_POST["username"]);
 		$username_enemy = mysqli_real_escape_string($conn, $_POST["username_enemy"]);
-		$winner = mysqli_real_escape_string($conn, $_POST["winner"]);
 		// Mogao bi se koristiti switch za razlicita spremanja podataka
-		$stmt = $conn->prepare("INSERT INTO bitka(username1, username2, winner) VALUES (?,?,?)");
-		$stmt->bind_param("ssi", $username, $username_enemy, $winner);
+		$stmt = $conn->prepare("INSERT INTO bitka(username1, username2, winner) VALUES (?,?,0)");
+		$stmt->bind_param("ss", $username, $username_enemy);
 		$stmt->execute() or die("4: Insert player query failed");
+		
+		$stmt2 = $conn->prepare("UPDATE `users` SET `no_victory` = `no_victory` + 1 WHERE username like ?;");
+		$stmt1 = $conn->prepare("UPDATE `users` SET `no_lose` = `no_lose` + 1 WHERE username like ?;");
+		
+		$stmt2->bind_param("s", $username);
+		$stmt1->bind_param("s", $username_enemy);
+		$stmt2->execute() or die("10: Insert player statistics");
+		$stmt1->execute() or die("10: Insert player statistics");	
+		
+		$stmt1->close();
+		$stmt2->close();
+		$stmt->close();
+		
+		echo "0";
+		
+	}else if(isset($_POST["Strength"])){
+		// Dodati varijable koje bi spremili
+		$shipName = mysqli_real_escape_string($conn, $_POST["nameOfShip"]);
+        $username = mysqli_real_escape_string($conn, $_POST["username"]);
+        $Strength = $_POST["Strength"];
+        $Cannons = $_POST["Cannons_Power"];
+        $Speed = $_POST["Speed"];
+        $Turn = $_POST["Turn_Speed"];
+        $gold = $_POST["gold"];
+        $rum = $_POST["rum"];
+        $wood = $_POST["wood"];
+        $pearl = $_POST["pearl"];
+		
+		// Mogao bi se koristiti switch za razlicita spremanja podataka
+		$stmt = $conn->prepare("UPDATE users, user_ship SET users.gold = ?, users.rum = ?, users.wood = ?, users.pearl = ?, user_ship.strength = ?, user_ship.singleCannonDmg = ?, user_ship.speed = ?, user_ship.turn_speed = ? WHERE users.username like ? AND users.username like user_ship.username AND user_ship.shipName like ?;");
+		$stmt->bind_param("iiiiiiiiss", $gold, $rum, $wood, $pearl, $Strength, $Cannons, $Speed, $Turn, $username, $shipName);
+		$stmt->execute() or die("4: Update ship and user resources query failed.");
 		$stmt->close();
 		echo "0";
+		
 	}else if(isset($_POST["nameOfShip"])){
 		
 		// Dodati varijable koje bi spremili
 		$shipName = mysqli_real_escape_string($conn, $_POST["nameOfShip"]);
 		$username = mysqli_real_escape_string($conn, $_POST["username"]);
+		$gold = mysqli_real_escape_string($conn, $_POST["gold"]);
+        $rum = mysqli_real_escape_string($conn, $_POST["rum"]);
+        $wood = mysqli_real_escape_string($conn, $_POST["wood"]);
+        $pearl = mysqli_real_escape_string($conn, $_POST["pearl"]);
 		
 		// Mogao bi se koristiti switch za razlicita spremanja podataka
 		$stmt = $conn->prepare("INSERT INTO `user_ship`(`username`, `shipName`) VALUES (?,?);");
 		$stmt->bind_param("ss", $username, $shipName);
 		$stmt->execute() or die("4: Insert ship query failed");
+
+		$stmt = $conn->prepare("UPDATE users SET users.gold = ?, users.rum = ?, users.wood = ?, users.pearl = ? WHERE users.username like ?;");
+		$stmt->bind_param("iiiis", $gold, $rum, $wood, $pearl, $username);
+		$stmt->execute() or die("9: Update user resources failed during the purchase ship.");
+
 		$stmt->close();
 		echo "0";
-	}    
+	}
 ?>
+
+

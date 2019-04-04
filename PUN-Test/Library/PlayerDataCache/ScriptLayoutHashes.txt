@@ -2,6 +2,8 @@ WindowsStandalone
 PlayerPath?
 C:/Users/MS Studio/Documents/Unity Projects/DIPRI/PUN-Test/Build/Build.exe
 SceneListBegin?
+Assets/Scenes/LoginScene.unity
+Assets/Scenes/RegisterScene.unity
 Assets/PUN_Warships/Scenes/MainMenu01.unity
 Assets/PUN_Warships/Scenes/SeaWars_GameScene.unity
 SceneListEnd?
@@ -147,7 +149,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 574c64e43cb56ec8c7d7af74589a251f Assembly-CSharp.dll:.RPGCamera
-955e58902b13a7f8ea825ef20d956113 Assembly-CSharp.dll:.BattleManger
+1d56dc252e68625531e2b5f3c3e6fbad Assembly-CSharp.dll:.BattleManger
 97b1bbbb88ca7f015c628923e0303836 Assembly-CSharp.dll:.ShipTilt
 e626bae268f8b272b7a2d07760d262c6 Assembly-CSharp.dll:.PickupController
 81b3ee5182065a2d4babbb973ed19ace Assembly-CSharp.dll:.InGameControls

@@ -20,6 +20,10 @@
 	$passwordHASH = password_hash($password, PASSWORD_DEFAULT);
 	$stmt->bind_param("sss", $username, $email, $passwordHASH);
 	$stmt->execute() or die("4: Insert player query failed");
+
+	$stmt = $conn->prepare("INSERT INTO `user_ship`(`username`, `shipName`) VALUES (?,'Brig')");
+	$stmt->bind_param("s", $username);
+	$stmt->execute() or die("8: Insert first ship query failed");
 	$stmt->close();
 
 	echo "0";

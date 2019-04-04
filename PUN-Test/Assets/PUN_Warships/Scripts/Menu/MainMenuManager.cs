@@ -20,6 +20,8 @@ public class MainMenuManager : MonoBehaviour {
         {
             _instance = this;
         }
+
+        CreateAllShips();
     }
 
 
@@ -50,8 +52,14 @@ public class MainMenuManager : MonoBehaviour {
 
         for (int i = 0; i < shipyardShips.Count; i++)
         {
+            
             int x = i;
-            //generate button and place it in holder
+
+
+
+
+
+                //generate button and place it in holder
             GameObject loadObject = Resources.Load("UI/BuyShipPanel") as GameObject;
             GameObject b = Instantiate(loadObject);
             b.transform.SetParent(holderListOfShips.transform);
@@ -73,7 +81,7 @@ public class MainMenuManager : MonoBehaviour {
 
             Button button = b.GetComponentInChildren<Button>();
             Debug.Log("ShipNumb: " + x);
-            button.onClick.AddListener(() => { BuyShip(x); });
+            button.onClick.AddListener(() => { BuyShip(x, int.Parse(shipyardBuyScript.priceWood.text), int.Parse(shipyardBuyScript.priceRum.text), int.Parse(shipyardBuyScript.priceGold.text), int.Parse(shipyardBuyScript.pricePearl.text)); });
             ///button.GetComponentInChildren<Text>().text = playerInformation.listOfShips[x].shipName;
 
         }
@@ -171,7 +179,7 @@ public class MainMenuManager : MonoBehaviour {
 
 
 		
-		CreateAllShips();
+		//CreateAllShips();
 		SoundButtonChange();
 		MusicButtonChange();
 
@@ -183,29 +191,44 @@ public class MainMenuManager : MonoBehaviour {
 		shipyardShips.Add(new Ship("Brig", 1, 5, 10, 350, 5, 8));
 		shipyardShips.Add(new Ship("Carrack", 2, 6, 11, 420, 10, 10));
 		shipyardShips.Add(new Ship("Cutter", 3, 8, 10, 500, 10, 10));
-		shipyardShips.Add(new Ship("Fluyt", 4, 10, 12, 700, 10, 10));
-		//shipyardShips.Add(new Ship("Fluyt", 5, 11, 15, 745, 10, 10));
-
-		//////////shipyardShips.Add(new Ship("", 6, 13, 10, 880, 10, 10));
-		shipyardShips.Add(new Ship("Frigate", 7, 10, 14, 1000, 10, 10));
-		//shipyardShips.Add(new Ship("Galleon", 8, 9, 15, 1300, 10, 10));
-		shipyardShips.Add(new Ship("Galleon", 9, 15, 17, 1500, 10, 10));
-		shipyardShips.Add(new Ship("Ship of the line", 10, 20, 20, 2000, 10, 10));
+        shipyardShips.Add(new Ship("Fluyt", 4, 10, 12, 700, 10, 10));
+		shipyardShips.Add(new Ship("Frigate", 5, 10, 14, 1000, 10, 10));
+		shipyardShips.Add(new Ship("Galleon", 6, 15, 17, 1500, 10, 10));
+		shipyardShips.Add(new Ship("Ship of the line", 7, 20, 20, 2000, 10, 10));
 
 		
 	}
 
-	public void BuyShip(int i){
-		playerInformation.Add_to_shipList(shipyardShips[i]);
-        StartCoroutine(Login(i));
+	public void BuyShip(int i, int wood, int rum, int gold, int pearl)
+    {
+        if (!(PlayerHasEnoughResourcesToBuy(wood, 0) && PlayerHasEnoughResourcesToBuy(rum, 1) && PlayerHasEnoughResourcesToBuy(gold, 2)  && PlayerHasEnoughResourcesToBuy(pearl, 3))) return; // price 100 gold for upgrade
+
+        foreach(Ship s in playerInformation.listOfShips)
+        {
+            if(s.tier == shipyardShips[i].tier) return;
+        }
+     ////   if (playerInformation.listOfShips.Contains(new Ship { tier = shipyardShips[i].tier})) return;
+
+        PayWithResources(wood, 0);
+        PayWithResources(rum, 1);
+        PayWithResources(gold, 2);
+        PayWithResources(pearl, 3);
+
+        playerInformation.Add_to_shipList(shipyardShips[i]);
+        UpdateResources();
+        StartCoroutine(ShipInsert(i));
     }
 
-    IEnumerator Login(int i)
+    IEnumerator ShipInsert(int i)
     {
         WWWForm form = new WWWForm();
 
         form.AddField("nameOfShip", shipyardShips[i].shipName);
         form.AddField("username", DBManager.username);
+        form.AddField("gold", playerInformation.gold);
+        form.AddField("rum", playerInformation.rum);
+        form.AddField("wood", playerInformation.wood);
+        form.AddField("pearl", playerInformation.pearl);
 
         WWW www = new WWW("http://localhost/theWarships/saveData.php", form);
 
@@ -221,7 +244,45 @@ public class MainMenuManager : MonoBehaviour {
         }
     }
 
-            public void OpenMenuPanelsOnMaster()
+    public void SkillInsertMySQL()
+    {
+        StartCoroutine(SkillsInsert());
+    }
+
+    private IEnumerator SkillsInsert()
+    {
+        WWWForm form = new WWWForm();
+
+        Ship ship = playerInformation.listOfShips[playerInformation.currentShipSelected];
+
+        form.AddField("nameOfShip", ship.shipName);
+        form.AddField("username", DBManager.username);
+        form.AddField("Strength", ship.shipSkills[0]);
+        form.AddField("Cannons_Power", ship.shipSkills[1]);
+        form.AddField("Speed", ship.shipSkills[2]);
+        form.AddField("Turn_Speed", ship.shipSkills[3]);
+        form.AddField("gold", playerInformation.gold);
+        form.AddField("rum", playerInformation.rum);
+        form.AddField("wood", playerInformation.wood);
+        form.AddField("pearl", playerInformation.pearl);
+
+        WWW www = new WWW("http://localhost/theWarships/saveData.php", form);
+
+        yield return www;
+
+        Debug.Log(ship.shipName + " " + DBManager.username + " " + ship.shipSkills[0] + " " + ship.shipSkills[1] + ship.shipSkills[2] + ship.shipSkills[3] + playerInformation.gold + playerInformation.rum + playerInformation.wood + playerInformation.pearl);
+
+        if (www.text[0] == '0')
+        {
+            Debug.Log("Ship skills are updated. Username: " + DBManager.username + ", sadrzaj: " + www.text);
+        }
+        else
+        {
+            Debug.Log("Ship skills aren't inserted. Error: " + www.text);
+        }
+    }
+
+    public void OpenMenuPanelsOnMaster()
     {
         OpenPanel(MainMenu);
         ResourcesPanel.SetActive(true);
@@ -319,7 +380,8 @@ public class MainMenuManager : MonoBehaviour {
 		
 		ship_name = playerInformation.listOfShips[playerInformation.currentShipSelected].shipName;
 		ship_str = playerInformation.listOfShips[playerInformation.currentShipSelected].strength;
-		ship_cannons = playerInformation.listOfShips[playerInformation.currentShipSelected].attackValue;
+		ship_cannons = playerInformation.listOfShips[playerInformation.currentShipSelected].singleCannonDmg *
+                       playerInformation.listOfShips[playerInformation.currentShipSelected].numberOfCannons;
 
 		ship_speed = playerInformation.listOfShips[playerInformation.currentShipSelected].speed;
 		ship_turn = playerInformation.listOfShips[playerInformation.currentShipSelected].turnSpeed;
@@ -432,20 +494,38 @@ public class MainMenuManager : MonoBehaviour {
 		//Debug.LogWarning(currentSkillSelected);
 
 		int value = ship.shipSkills[currentSkillSelected];
+        int[] base_Ship_value = new int[]{ 1, 1, 1, 1 };
+
+
+        foreach(Ship s in shipyardShips)
+        {
+            if (ship.tier == s.tier)
+            {
+                base_Ship_value[0] = s.strength;
+                base_Ship_value[1] = s.singleCannonDmg;
+                base_Ship_value[2] = s.speed;
+                base_Ship_value[3] = s.turnSpeed;
+            }
+        }
+        
 		
 		switch (currentSkillSelected)
 		{
 			case 0:
-				ship.strength += value * 2; break;
+				ship.strength = value * 2 + base_Ship_value[0];
+                break;//tu  stavir nesto
 			case 1:
-				ship.attackValue += value;
-				/*/ship.numberOfCannons += value;*/ break;
+                ship.singleCannonDmg = value + base_Ship_value[1];
+                //ship.attackValue += value;
+                /*/ship.numberOfCannons += value;*/
+                break;
 			case 2:
-				ship.speed += value;  break;
+				ship.speed = value + base_Ship_value[2];  break;
 			case 3:
-				ship.turnSpeed += value; break;
+				ship.turnSpeed = value + base_Ship_value[3]; break;
 				
 		}
+        
 		UpdateHarborMenu();
 			 
 	}

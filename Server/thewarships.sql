@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 02, 2019 at 10:06 PM
+-- Generation Time: Apr 04, 2019 at 04:00 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -60,10 +60,10 @@ INSERT INTO `ships` (`ID`, `name`, `no_cannons`, `speed`, `turn_speed`, `strengt
 (1, 'Brig', 8, 5, 10, 350, 1, 5),
 (2, 'Carrack', 10, 6, 11, 420, 2, 10),
 (3, 'Cutter', 10, 8, 10, 500, 3, 10),
-(4, 'Fluyt', 10, 10, 12, 700, 5, 10),
+(4, 'Fluyt', 10, 10, 12, 700, 4, 10),
 (5, 'Frigate', 10, 10, 14, 1000, 5, 10),
-(6, 'Galleon', 10, 15, 17, 1500, 5, 10),
-(7, 'Ship of the line', 10, 20, 20, 2000, 5, 10);
+(6, 'Galleon', 10, 15, 17, 1500, 6, 10),
+(7, 'Ship of the line', 10, 20, 20, 2000, 7, 10);
 
 -- --------------------------------------------------------
 
@@ -92,9 +92,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`username`, `email`, `password`, `no_ships`, `online`, `gold`, `rum`, `wood`, `pearl`, `experience`, `level`, `no_victory`, `no_lose`) VALUES
-('karlozap', 'karlo@unipu.com', '$2y$10$nC82r6.gyhVxEJFPXpPEte4SXRyayL/Cr6ecDT/stVRXiOa6pkk2.', 1, 0, 100, 100, 100, 50, 1, 1, 0, 0),
-('ktvrdinic', 'karlo@gmail.com', '$2y$10$lMJMCyqbmNruC/bmZBCwU.CdmdHPM7buy4a3cJ.G3RM8mpzbEbhr2', 1, 0, 100, 100, 100, 50, 0, 1, 0, 0),
-('mtvrdinic', 'marin@gmail.com', '$2y$10$fxdPKTonBdayIfpv97r.G.XgM2thIoQcpLxaZnmVNMr05ZpFOF.wS', 1, 0, 100, 100, 100, 50, 0, 1, 0, 0);
+('karlotvrdinic', 'ktvrdi@gmail.com', '$2y$10$SkxVrS8GdLhPVIIYkjXsOOgNt6M4eqKh6LW9jYCetQJkE3E7d6FiK', 1, 0, 100, 100, 100, 50, 1, 1, 0, 0),
+('karlozap', 'karlozap13@gmail.com', '$2y$10$5eC9ZiTjY6/CrOS7gx4xbu9jmOptKHXv0xB/cMDONnxCG4SUGh8P2', 1, 0, 18320, 1970, 7988, 356, 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -105,11 +104,11 @@ INSERT INTO `users` (`username`, `email`, `password`, `no_ships`, `online`, `gol
 CREATE TABLE `user_ship` (
   `ID` int(11) NOT NULL,
   `username` varchar(40) COLLATE utf8_bin NOT NULL,
-  `no_cannons` int(11) NOT NULL DEFAULT '1',
-  `speed` int(11) NOT NULL DEFAULT '1',
-  `strength` int(11) NOT NULL DEFAULT '1',
-  `turn_speed` int(11) NOT NULL DEFAULT '1',
-  `singleCannonDmg` int(11) NOT NULL DEFAULT '1',
+  `no_cannons` int(11) NOT NULL DEFAULT '0',
+  `speed` int(11) NOT NULL DEFAULT '0',
+  `strength` int(11) NOT NULL DEFAULT '0',
+  `turn_speed` int(11) NOT NULL DEFAULT '0',
+  `singleCannonDmg` int(11) NOT NULL DEFAULT '0',
   `shipName` varchar(40) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -118,10 +117,11 @@ CREATE TABLE `user_ship` (
 --
 
 INSERT INTO `user_ship` (`ID`, `username`, `no_cannons`, `speed`, `strength`, `turn_speed`, `singleCannonDmg`, `shipName`) VALUES
-(4, 'karlozap', 1, 1, 1, 1, 1, 'Carrack'),
-(5, 'karlozap', 1, 1, 1, 1, 1, 'Cutter'),
-(6, 'karlozap', 1, 1, 1, 1, 1, 'Fluyt'),
-(7, 'karlozap', 1, 1, 1, 1, 1, 'Galleon');
+(2, 'karlozap', 0, 1, 4, 5, 5, 'Brig'),
+(7, 'karlozap', 0, 0, 0, 0, 0, 'Ship of the line'),
+(10, 'karlozap', 0, 0, 0, 0, 0, 'Carrack'),
+(11, 'karlotvrdinic', 0, 0, 0, 0, 0, 'Brig'),
+(12, 'karlozap', 0, 0, 0, 0, 0, 'Frigate');
 
 --
 -- Indexes for dumped tables
@@ -165,7 +165,7 @@ ALTER TABLE `user_ship`
 -- AUTO_INCREMENT for table `bitka`
 --
 ALTER TABLE `bitka`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `ships`
@@ -177,7 +177,7 @@ ALTER TABLE `ships`
 -- AUTO_INCREMENT for table `user_ship`
 --
 ALTER TABLE `user_ship`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables

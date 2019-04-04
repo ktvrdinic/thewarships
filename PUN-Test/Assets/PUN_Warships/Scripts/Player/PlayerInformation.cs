@@ -100,7 +100,11 @@ public class PlayerInformation : MonoBehaviour {
         {
             _instance = this;
         }
+
+        LoadFromMySQL();
     }
+
+ 
 
     // Use this for initialization
     void Start () 
@@ -109,7 +113,11 @@ public class PlayerInformation : MonoBehaviour {
         //Add_to_shipList(new Ship("Brig", 1, 5, 10, 350, 5, 8));
         //Add_to_shipList(new Ship("Carrack", 1, 7, 12, 380, 10, 4));
 
-        LoadFromMySQL();
+
+
+        //LoadFromMySQL();  -> call in  Awake
+
+
         //Load_inventory();
         //foreach (var item in listOfShips)
         //{
@@ -124,8 +132,8 @@ public class PlayerInformation : MonoBehaviour {
     
     public void LoadFromMySQL()
     {
-        PlayerStats id = IO.Load<PlayerStats>("Player_stats");
-        listOfShips = id.listOfShips;
+       // PlayerStats id = IO.Load<PlayerStats>("Player_stats");
+        listOfShips = DBManager.shipyardShips;
 
         playerName = DBManager.username;
         gold = DBManager.gold;

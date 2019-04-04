@@ -87,10 +87,20 @@ public class CreatePlayers : Photon.PunBehaviour {
         //    ImageFade.Instance.fadeaway = !ImageFade.Instance.fadeaway;
         //    ImageFade.Instance.startfade = true;
         //}
+        Debug.Log("OnJoinedRoom: " + PhotonNetwork.room.playerCount + ". -> " + PhotonNetwork.player.name + " : " + PhotonNetwork.player.isMasterClient);
 
     }
 
-  
+    private void OnDisconnectedFromServer(NetworkDisconnection info)
+    {
+        Debug.Log("CreatePlayers.OnDisconnectedFromServer()");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("LoginScene");
+
+
+        // save data to database
+    }
+
+
 
     void CratePlayerObjects()
     {
@@ -103,7 +113,7 @@ public class CreatePlayers : Photon.PunBehaviour {
         string ShipName;
         if (playerInformation == null)
         {
-            ShipName = "Ships/Cartoon/Galleon";
+            ShipName = "Ships/Cartoon/Ship of the line";
         }
         else
         {
@@ -114,7 +124,7 @@ public class CreatePlayers : Photon.PunBehaviour {
         GameObject newPLayerObject = PhotonNetwork.Instantiate(ShipName, trans.position, trans.rotation, 0);
 
 
-        
+
         //camera.transform.Rotate(0, 180, 0);
 
         camera.transform.SetParent(newPLayerObject.transform);
@@ -122,26 +132,28 @@ public class CreatePlayers : Photon.PunBehaviour {
         camera.Target = newPLayerObject.transform;
         newPLayerObject.GetComponent<ShipController>().RPGcamera = camera;
 
-        if(PhotonNetwork.room.playerCount == 2)
+        if (PhotonNetwork.room.playerCount == 2)
             newPLayerObject.transform.Rotate(0, 180, 0);
 
-        if(playerInformation != null)
+        if (playerInformation != null)
         {
             //BattleManger.Instance.playersInGame.Add(playerInformation.playerName + ":" + PhotonNetwork.room.playerCount);
             //playerinstance
             BattleManger.Instance.playersInGame.Add(playerInformation);
 
         }
-        
+
 
         if (PhotonNetwork.room.playerCount == 1)
         {
             //wait for players panel
             BattleManger.Instance.waitForPlayers.SetActive(true);
-            
+
         }
-        else if(PhotonNetwork.room.playerCount == 2) //call on player 2 when connect
+        else if (PhotonNetwork.room.playerCount == 2) //call on player 2 when connect
         {
+            PrintPlayersInRoom("OnJoinedRoom");
+
             BattleManger.Instance.waitForPlayers.SetActive(false);
             BattleManger.Instance.playersInGame.Add(playerInformation);
             //start battle
@@ -150,10 +162,25 @@ public class CreatePlayers : Photon.PunBehaviour {
 
 
     }
+
+    private void PrintPlayersInRoom(string s)
+    {
+        foreach (PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            Debug.Log(s + ": PrintPlayersInRoom: " + " -> " + p.name + " : " + p.isMasterClient);
+        }
+    }
+
+
+
+
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer) //call on player 1 when player2 connect
     {
         //base.OnPhotonPlayerConnected(newPlayer);
-        Debug.Log(newPlayer.name + " : " + newPlayer.isMasterClient);
+        PrintPlayersInRoom("OnPhotonPlayerConnected");
+
+
+        //Debug.Log("OnPhotonPlayerConnected: " + PhotonNetwork.room.playerCount + ". -> " + newPlayer.name + " : " + newPlayer.isMasterClient);
 
         PlayerInformation playerInformation;
         playerInformation = PlayerInformation.Instance;
@@ -177,7 +204,10 @@ public class CreatePlayers : Photon.PunBehaviour {
 
     public override void OnLeftRoom()
     {
-        base.OnLeftRoom();
+        //base.OnLeftRoom();
+
+        //save stats and check if battle is over, then 
+
         PhotonNetwork.LoadLevel("MainMenu01");
     }
 

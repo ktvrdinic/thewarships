@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DBManager : MonoBehaviour {
+public class DBManager : MonoBehaviour
+{
 
     public static string username;
     public static List<Ship> shipyardShips;

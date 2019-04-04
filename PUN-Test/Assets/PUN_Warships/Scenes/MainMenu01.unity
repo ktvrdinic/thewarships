@@ -343,7 +343,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 22.09497, y: -24.630148}
+  m_AnchoredPosition: {x: 22.095, y: -24.630148}
   m_SizeDelta: {x: 44.19, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &29180719
@@ -12264,6 +12264,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1069364650}
+        m_MethodName: SkillInsertMySQL
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &928261201
@@ -18786,7 +18797,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1467926881827126, guid: de41e8dcfaa8b204eada1f0767b5b5bf, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de41e8dcfaa8b204eada1f0767b5b5bf, type: 2}
@@ -21131,7 +21142,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 22.09497, y: -24.630146}
+  m_AnchoredPosition: {x: 22.095, y: -24.630146}
   m_SizeDelta: {x: 44.19, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1608860139

@@ -31,7 +31,7 @@ public class PhotonMainMenu : Photon.PunBehaviour
 
         if (!playerName.Equals(""))
         {
-            PhotonNetwork.player.name = playerName;
+            PhotonNetwork.playerName = playerName;
 
             PhotonNetwork.ConnectUsingSettings(Version.ToString());
             //PhotonNetwork.GameVersion = this.Version + "." + SceneManagerHelper.ActiveSceneBuildIndex;
@@ -41,6 +41,8 @@ public class PhotonMainMenu : Photon.PunBehaviour
         {
             Debug.LogError("Player Name is invalid.");
         }
+
+        Debug.Log("PlaerName: " + PhotonNetwork.playerName);
 
     }
 
@@ -110,7 +112,8 @@ public class PhotonMainMenu : Photon.PunBehaviour
 
     public override void OnDisconnectedFromPhoton()
     {
-        Debug.Log("PhotonMainMenu.OnDisconnected()");
+        Debug.Log("PhotonMainMenu.OnDisconnectedFromPhoton()");
+    
         UnityEngine.SceneManagement.SceneManager.LoadScene("LoginScene");
     }
 

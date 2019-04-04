@@ -18,7 +18,7 @@ public class BattleManger : Photon.MonoBehaviour {
     public Text EnemyHealthText;
     public Image EnemyRankImage;
     public Slider EnemyHealthSlider;
-
+    public string loser;
 
 
     public GameObject waitForPlayers;
@@ -55,7 +55,7 @@ public class BattleManger : Photon.MonoBehaviour {
     void Start ()
    {
 
-
+        
         //playerInformation = PlayerInformation.Instance;
 
         //if(playerInformation != null)
@@ -63,8 +63,54 @@ public class BattleManger : Photon.MonoBehaviour {
         Init();
 
         UpdatePlayerUI();
+        Debug.Log("Username: " + DBManager.username + ", enemy: " + BattleManger.Instance.EnemyNameText.text);
 
+    }
+    bool isWin = false;
+    private void Update()
+    {
+        if(winner != "" && !isWin && PhotonNetwork.isMasterClient)
+        {
+            isWin = true;
+            StartCoroutine(InsertWinnerMySQL());
+            Debug.LogError("Winner is :" + winner);
+        }
+    }
 
+    // NE BRISATI
+    IEnumerator InsertWinnerMySQL()
+    {
+        WWWForm form = new WWWForm();
+
+        
+
+        foreach (PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            //Debug.Log(s + ": PrintPlayersInRoom: " + " -> " + p.name + " : " + p.isMasterClient);
+            if (winner != p.name)
+            {
+                loser = p.name;
+            }
+        }
+
+        Debug.Log("Username: " + DBManager.username + ", enemy: " + BattleManger.Instance.EnemyNameText.text);
+
+        form.AddField("username", winner);
+        form.AddField("username_enemy", loser); // Dodati neprijatelja
+        
+
+        WWW www = new WWW("http://localhost/theWarships/saveData.php", form);
+
+        yield return www;
+
+        if (www.text[0] == '0')
+        {
+            Debug.Log("Battle successfully inserted in MySQL.");
+        }
+        else
+        {
+            Debug.Log("Battle creation failed in MySQL. Error #" + www.text);
+        }
     }
 
     public void Init()
@@ -73,15 +119,15 @@ public class BattleManger : Photon.MonoBehaviour {
         {
 
             //player
-            PlayerHealthText.text = "100";
-            PlayerNameText.text = playersInGame[0].playerName;
+            PlayerHealthText.text = "100/100";
+            PlayerNameText.text = PhotonNetwork.player.name; ///playersInGame[0].playerName;
             //Rankimage
             PlayerHealthSlider.value = 100;
 
 
             //enemy
-            EnemyHealthText.text = "100";
-            EnemyNameText.text = playersInGame[1].playerName;
+            EnemyHealthText.text = "100/100";
+            EnemyNameText.text = GetEnemyName();  //playersInGame[1].playerName;
             //Rankimage
             EnemyHealthSlider.value = 100;
 
@@ -91,12 +137,35 @@ public class BattleManger : Photon.MonoBehaviour {
         }
     }
 
+    string GetEnemyName()
+    {
+        string s = "";
+
+        foreach (PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            //Debug.Log(s + ": PrintPlayersInRoom: " + " -> " + p.name + " : " + p.isMasterClient);
+            if (!p.name.Equals(PhotonNetwork.player.name))
+            {
+                s = p.name;
+            }
+        }
+
+
+        return s;
+    }
+
 
     void UpdatePlayerUI()
     {
         
         //rankImages[playerInformation.level];   
     }
+
+    public string winner = "";
+
+
+
+
 
 
 

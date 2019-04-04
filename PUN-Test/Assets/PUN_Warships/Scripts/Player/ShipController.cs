@@ -271,15 +271,41 @@ public class ShipController : MonoBehaviour
             if (mStats.sailHealth.x <= 0)
             {
                 BattleManger.Instance.losePanel.SetActive(true);
-                ///// Time.timeScale = 0;
+                BattleManger.Instance.PlayersUI.SetActive(false);
+
+
+                BattleManger.Instance.winner = BattleManger.Instance.EnemyNameText.text.ToString();
+                photonView.RPC("BattleWinnerIs", PhotonTargets.Others);
+
                 photonView.RPC("GameWin", PhotonTargets.Others);
+                //BattleManger.Instance.winner = BattleManger.Instance.EnemyNameText.text.ToString();
+
+                ///Debug.LogError("OnCollisionEnter.Winner is " + BattleManger.Instance.winner + " : MasterClient" + PhotonNetwork.isMasterClient);
+                ///
+
             }
 
             //// cb.DestroyOnHit();
 
+
+
         }
 
     }
+
+    [PunRPC]
+    public void BattleWinnerIs()
+    {
+        //if(playerIndex == 1)
+        //{
+
+            BattleManger.Instance.winner = BattleManger.Instance.PlayerNameText.text.ToString();
+            ///Debug.LogError("BattleWinnerIs.Winner is " + BattleManger.Instance.winner + " : MasterClient" + PhotonNetwork.isMasterClient);
+
+    }
+
+
+
 
     [PunRPC]
     void MajVie(float vie)
@@ -295,34 +321,36 @@ public class ShipController : MonoBehaviour
         BattleManger.Instance.winPanel.SetActive(true);
         BattleManger.Instance.PlayersUI.SetActive(false);
 
-        if (true)// Ako je prvi igrac pobjedio
-        {
-            InsertWinnerMySQL(0);
-        }
-        else if (false) // Ako je drugi igrac pobjedio
-        {
-            InsertWinnerMySQL(1);
-        }
-        /// Time.timeScale = 0;
-    }
-    // NE BRISATI
-    IEnumerator InsertWinnerMySQL(int winner)
-    {
-        WWWForm form = new WWWForm();
+        //StartCoroutine( InsertWinnerMySQL());
+        //if (BattleManger.Instance.winner == BattleManger.Instance.PlayerNameText.text)// Ako je prvi igrac pobjedio
+        //{
+        //    InsertWinnerMySQL(0);
+        //}
+        //else if (BattleManger.Instance.winner == BattleManger.Instance.PlayerNameText.text) // Ako je drugi igrac pobjedio
+        //{
+        //    InsertWinnerMySQL(1);
+        //}
 
-        form.AddField("username", DBManager.username);
-        form.AddField("username_enemy", DBManager.username); // Dodati neprijatelja
-        form.AddField("winner", winner);
-
-        WWW www = new WWW("http://localhost/theWarships/saveData.php", form);
-
-        yield return www;
-        if (www.text[0] == '0'){
-            Debug.Log("Battle successfully inserted in MySQL.");
-        }else{
-            Debug.Log("Battle creation failed in MySQL. Error #" + www.text);
-        }
 
     }
+    //// NE BRISATI
+    //IEnumerator InsertWinnerMySQL()
+    //{
+    //    WWWForm form = new WWWForm();
+
+    //    form.AddField("username", DBManager.username);
+    //    form.AddField("username_enemy", BattleManger.Instance.EnemyNameText.text); // Dodati neprijatelja
+ 
+
+    //    WWW www = new WWW("http://localhost/theWarships/saveData.php", form);
+
+    //    yield return www;
+    //    if (www.text[0] == '0'){
+    //        Debug.Log("Battle successfully inserted in MySQL.");
+    //    }else{
+    //        Debug.Log("Battle creation failed in MySQL. Error #" + www.text);
+    //    }
+
+    //}
 }
 
