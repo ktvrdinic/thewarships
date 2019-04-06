@@ -20,13 +20,13 @@ public class LoginSql : MonoBehaviour
 
 
         AllShips = new List<Ship>();
-        AllShips.Add(new Ship("Brig", 1, 5, 10, 350, 5, 8));
-        AllShips.Add(new Ship("Carrack", 2, 6, 11, 420, 10, 10));
-        AllShips.Add(new Ship("Cutter", 3, 8, 10, 500, 10, 10));
-        AllShips.Add(new Ship("Fluyt", 4, 10, 12, 700, 10, 10));
-        AllShips.Add(new Ship("Frigate", 5, 10, 14, 1000, 10, 10));
-        AllShips.Add(new Ship("Galleon", 6, 15, 17, 1500, 10, 10));
-        AllShips.Add(new Ship("Ship of the line", 7, 20, 20, 2000, 10, 10));
+        AllShips.Add(new Ship("Brig", 1, 15, 25, 350, 10, 8));
+        AllShips.Add(new Ship("Carrack", 2, 15, 20, 420, 10, 8));
+        AllShips.Add(new Ship("Cutter", 3, 14, 20, 500, 10, 8));
+        AllShips.Add(new Ship("Fluyt", 4, 10, 12, 800, 15, 12));
+        AllShips.Add(new Ship("Frigate", 5, 12, 17, 1000, 20, 20));
+        AllShips.Add(new Ship("Galleon", 6, 12, 18, 1500, 20, 20));
+        AllShips.Add(new Ship("Ship of the line", 7, 10, 15, 2000, 25, 30));
 
 
         //ImageFade.Instance.startfade = true;
@@ -51,7 +51,7 @@ public class LoginSql : MonoBehaviour
         form.AddField("name", usernameField.text);
         form.AddField("password", passwordField.text);
 
-        WWW www = new WWW("http://localhost/theWarships/login.php", form);
+        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/login.php", form);
 
         yield return www;
 

@@ -7,6 +7,7 @@ public class Cannon : MonoBehaviour
 {
 	// Cannonball prefab
 	public GameObject cannonballPrefab;
+    public int CannonBallDmg = 1;
 
 	// Initial velocity applied to the cannon ball's rigidbody
 	public float initialVelocity = 15f;
@@ -124,7 +125,11 @@ public class Cannon : MonoBehaviour
 
 				// It's usually a good idea to know who fired the cannon ball
 				Cannonball cb = go.GetComponent<Cannonball>();
-				if (cb != null) cb.owner = mStats.gameObject;
+                if (cb != null)
+                {
+                    cb.owner = mStats.gameObject;
+                    cb.damage = CannonBallDmg;
+                }
 
 				// Rigidbody is generally expected to be present
 				Rigidbody rb = go.GetComponent<Rigidbody>();

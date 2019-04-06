@@ -164,11 +164,13 @@ public class MainMenuManager : MonoBehaviour {
 
 
 
+
 	void Init(){
 
 		shipSkillsName = new string[]{"Strength", "Cannons Power", "Speed", "Turn Speed"};
+        StartCoroutine(RefreshResources());
 
-		CloseAllPanels();
+        CloseAllPanels();
 		UpdateResources();
 		//OpenPanel(MainMenu);
 
@@ -184,17 +186,22 @@ public class MainMenuManager : MonoBehaviour {
 		MusicButtonChange();
 
 		GenerateListOfShipsButtons();
+
+        if(playerInformation)
+            SelectShip(playerInformation.currentShipSelected);
+
+
 	}
 
 	void CreateAllShips(){
 		shipyardShips = new List<Ship>();
-		shipyardShips.Add(new Ship("Brig", 1, 5, 10, 350, 5, 8));
-		shipyardShips.Add(new Ship("Carrack", 2, 6, 11, 420, 10, 10));
-		shipyardShips.Add(new Ship("Cutter", 3, 8, 10, 500, 10, 10));
-        shipyardShips.Add(new Ship("Fluyt", 4, 10, 12, 700, 10, 10));
-		shipyardShips.Add(new Ship("Frigate", 5, 10, 14, 1000, 10, 10));
-		shipyardShips.Add(new Ship("Galleon", 6, 15, 17, 1500, 10, 10));
-		shipyardShips.Add(new Ship("Ship of the line", 7, 20, 20, 2000, 10, 10));
+		shipyardShips.Add(new Ship("Brig", 1, 15, 25, 350, 10, 8));
+		shipyardShips.Add(new Ship("Carrack", 2, 15, 20, 420, 10, 8));
+		shipyardShips.Add(new Ship("Cutter", 3, 14, 20, 500, 10, 8));
+        shipyardShips.Add(new Ship("Fluyt", 4, 10, 12, 800, 15, 12));
+		shipyardShips.Add(new Ship("Frigate", 5, 12, 17, 1000, 20, 20));
+		shipyardShips.Add(new Ship("Galleon", 6, 12, 18, 1500, 20, 20));
+		shipyardShips.Add(new Ship("Ship of the line", 7, 10, 15, 2000, 25, 30));
 
 		
 	}
@@ -230,7 +237,7 @@ public class MainMenuManager : MonoBehaviour {
         form.AddField("wood", playerInformation.wood);
         form.AddField("pearl", playerInformation.pearl);
 
-        WWW www = new WWW("http://localhost/theWarships/saveData.php", form);
+        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/saveData.php", form);
 
         yield return www;
 
@@ -266,11 +273,11 @@ public class MainMenuManager : MonoBehaviour {
         form.AddField("wood", playerInformation.wood);
         form.AddField("pearl", playerInformation.pearl);
 
-        WWW www = new WWW("http://localhost/theWarships/saveData.php", form);
+        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/saveData.php", form);
 
         yield return www;
 
-        Debug.Log(ship.shipName + " " + DBManager.username + " " + ship.shipSkills[0] + " " + ship.shipSkills[1] + ship.shipSkills[2] + ship.shipSkills[3] + playerInformation.gold + playerInformation.rum + playerInformation.wood + playerInformation.pearl);
+        // Debug.Log(ship.shipName + " " + DBManager.username + " " + ship.shipSkills[0] + " " + ship.shipSkills[1] + ship.shipSkills[2] + ship.shipSkills[3] + playerInformation.gold + playerInformation.rum + playerInformation.wood + playerInformation.pearl);
 
         if (www.text[0] == '0')
         {
@@ -576,9 +583,47 @@ public class MainMenuManager : MonoBehaviour {
 		updateMainMenu();
 	}
 
-	
+    IEnumerator RefreshResources()
+    {
+        WWWForm form = new WWWForm();
 
-	void Start () 
+        form.AddField("username", DBManager.username);
+
+        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/fetchUser.php", form);
+
+        yield return www;
+
+        if (www.text[0] == '0')
+        {
+            string[] temp = www.text.Split('_');
+
+            Debug.Log("Resources are fetched. Resources: " + temp[1] + ", " + temp[2] + ", " + temp[3] + ", " + temp[4] + ", " + temp[5] + ", " + temp[6] + ", " + temp[7] + ", " + temp[8]);
+            DBManager.gold = int.Parse(temp[1]);
+            playerInformation.gold = DBManager.gold;
+            DBManager.rum = int.Parse(temp[2]);
+            playerInformation.rum = DBManager.rum;
+            DBManager.wood = int.Parse(temp[3]);
+            playerInformation.wood = DBManager.wood;
+            DBManager.pearl = int.Parse(temp[4]);
+            playerInformation.pearl = DBManager.pearl;
+            DBManager.experience = int.Parse(temp[5]);
+            playerInformation.experience = DBManager.experience;
+            DBManager.level = int.Parse(temp[6]);
+            playerInformation.level = DBManager.level;
+            DBManager.no_victory = int.Parse(temp[7]);
+            // playerInformation.no_victory = DBManager.no_victory
+            DBManager.no_lose = int.Parse(temp[8]);
+            // playerInformation.no_lose = DBManager.no_lose;
+            // gold[1], rum[2], wood[3], pearl[4], experience[5], level[6], no_victory[7], no_lose[8]
+        }
+        else
+        {
+            Debug.Log("Resources aren't fetched. Error # " + www.text);
+        }
+    }
+
+
+    void Start () 
 	{
         //GenerateListOfShipsButtons(playerInformation);
         playerInformation = PlayerInformation.Instance;    

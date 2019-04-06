@@ -3,6 +3,7 @@
 //using Photon.Realtime;
 using ExitGames.Client.Photon;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ShipController : MonoBehaviour
 {
@@ -84,6 +85,107 @@ public class ShipController : MonoBehaviour
 
         photonView = GetComponent<PhotonView>();
         boxCollider = GetComponentInChildren<BoxCollider>();
+
+        ////onstart()
+        //if (BattleManger.Instance)
+        //{
+        //    mStats.ShipHealth = PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].strength;
+            
+        //    BattleManger.Instance.PlayerLevelText.text = PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].shipName;
+            
+
+        //    photonView.RPC("InitPlayersUIOnStartBattle", PhotonTargets.Others, BattleManger.Instance.PlayerLevelText.text);
+        //    //shiphealth
+        //    BattleManger.Instance.PlayerHealthText.text = mStats.ShipHealth.ToString();
+        //    BattleManger.Instance.PlayerHealthSlider.maxValue = (int) mStats.ShipHealth;
+        //    BattleManger.Instance.PlayerHealthSlider.value = (int)mStats.ShipHealth;
+        //    photonView.RPC("EnemyShipHealth", PhotonTargets.Others, mStats.ShipHealth);
+        //}
+
+
+
+        if (BattleManger.Instance)
+        {
+            //BattleManger.Instance.players = new List<PlayerInBattle>(2);
+            //BattleManger.Instance.ships = new List<Ship>(2);
+
+
+            //fill for player
+            if (!PlayerInformation.Instance) return;
+
+            //init shipvalues
+            mStats.ShipHealth = PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].strength;
+            mStats.Ship_singleCannonDmg = PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].singleCannonDmg;
+            mStats.maxMovementSpeed = PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].speed;
+            mStats.maxTurningSpeed = PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].turnSpeed;
+
+            foreach (Cannon cannon in mCannonsLeft)
+            {
+                cannon.CannonBallDmg = mStats.Ship_singleCannonDmg;
+
+            }
+            foreach (Cannon cannon in mCannonsRight)
+            {
+                cannon.CannonBallDmg = mStats.Ship_singleCannonDmg;
+
+            }
+
+            //
+
+
+
+            PlayerInBattle playerInBattle = new PlayerInBattle() { playerName = PlayerInformation.Instance.playerName,
+                                                                   level = PlayerInformation.Instance.level,
+                                                                    exp = PlayerInformation.Instance.experience,
+
+            shipName = PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].shipName,
+            strength = PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].strength,
+            singleCannonDmg = PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].singleCannonDmg,
+            speed = PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].speed,
+            turnSpeed = PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].turnSpeed
+            };
+
+            BattleManger.Instance.players.Insert(0, playerInBattle);
+            ///BattleManger.Instance.ships.Add(PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected]);
+
+            //fill for enemy
+            photonView.RPC("InitBattleManagerProperties", PhotonTargets.Others, 
+                PlayerInformation.Instance.playerName, 
+                PlayerInformation.Instance.level,
+                PlayerInformation.Instance.experience,
+
+                PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].shipName,
+                PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].strength,
+                PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].singleCannonDmg,
+                PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].speed,
+                PlayerInformation.Instance.listOfShips[PlayerInformation.Instance.currentShipSelected].turnSpeed
+                );
+
+        }
+
+        
+    }
+
+    [PunRPC]
+    void InitBattleManagerProperties(string _playerName, int _level, int _exp, string _shipName, int _strength, int _singleCannonDmg, int _speed, int _turnSpeed )
+    {
+        PlayerInBattle player = new PlayerInBattle()
+        {
+            playerName = _playerName,
+            level = _level,
+            exp = _exp,
+
+            shipName = _shipName,
+            strength = _strength,
+            singleCannonDmg = _singleCannonDmg,
+            speed = _speed,
+            turnSpeed = _turnSpeed
+        };
+
+        BattleManger.Instance.players.Insert(1, player);
+
+
+        ///BattleManger.Instance.ships.Add(player.listOfShips[player.currentShipSelected]);
     }
 
     /// <summary>
@@ -237,6 +339,7 @@ public class ShipController : MonoBehaviour
                 foreach (Cannon cannon in mCannonsLeft)
                 {
                     cannon.Fire(dir, distance);
+                    
                 }
             }
             else
@@ -261,14 +364,16 @@ public class ShipController : MonoBehaviour
         {
             float damage = mStats.ApplyDamageToSails(cb.damage);
             ///////photonView.RPC("ApplyDamageToSails", RpcTarget.All, cb.damage);
-
+            Debug.Log("Damage: "+ damage);
 
             //TextUPdate
-            BattleManger.Instance.PlayerHealthText.text = mStats.sailHealth.x.ToString() + "/100";
-            BattleManger.Instance.PlayerHealthSlider.value = mStats.sailHealth.x;
-            photonView.RPC("MajVie", PhotonTargets.Others, mStats.sailHealth.x);
+            BattleManger.Instance.PlayerHealthText.text = mStats.ShipHealth.ToString() + "/" + BattleManger.Instance.maxHealthPlayer;
+            BattleManger.Instance.PlayerHealthSlider.value = mStats.ShipHealth;
 
-            if (mStats.sailHealth.x <= 0)
+            
+            photonView.RPC("MajVie", PhotonTargets.Others, mStats.ShipHealth, BattleManger.Instance.maxHealthPlayer);
+
+            if (mStats.ShipHealth <= 0)
             {
                 BattleManger.Instance.losePanel.SetActive(true);
                 BattleManger.Instance.PlayersUI.SetActive(false);
@@ -281,8 +386,6 @@ public class ShipController : MonoBehaviour
                 //BattleManger.Instance.winner = BattleManger.Instance.EnemyNameText.text.ToString();
 
                 ///Debug.LogError("OnCollisionEnter.Winner is " + BattleManger.Instance.winner + " : MasterClient" + PhotonNetwork.isMasterClient);
-                ///
-
             }
 
             //// cb.DestroyOnHit();
@@ -291,6 +394,21 @@ public class ShipController : MonoBehaviour
 
         }
 
+    }
+
+    [PunRPC]
+    void EnemyShipHealth(float vie)
+    {
+        BattleManger.Instance.EnemyHealthText.text = vie.ToString();
+        //BattleManger.Instance.EnemyHealthSlider.maxValue = (int)vie;
+        BattleManger.Instance.EnemyHealthSlider.value = (int)vie;
+    }
+
+
+    [PunRPC]
+    void InitPlayersUIOnStartBattle(string vie)
+    {
+        BattleManger.Instance.EnemyLevelText.text = vie;
     }
 
     [PunRPC]
@@ -304,13 +422,10 @@ public class ShipController : MonoBehaviour
 
     }
 
-
-
-
     [PunRPC]
-    void MajVie(float vie)
+    void MajVie(float vie, int max)
     {
-        BattleManger.Instance.EnemyHealthText.text = vie.ToString() + "/100";
+        BattleManger.Instance.EnemyHealthText.text = vie.ToString() + "/" + max.ToString();
         BattleManger.Instance.EnemyHealthSlider.value = vie;
         Debug.Log("Hit!!!");
     }

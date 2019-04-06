@@ -154,10 +154,15 @@ public class CreatePlayers : Photon.PunBehaviour {
         {
             PrintPlayersInRoom("OnJoinedRoom");
 
-            BattleManger.Instance.waitForPlayers.SetActive(false);
-            BattleManger.Instance.playersInGame.Add(playerInformation);
-            //start battle
-            BattleManger.Instance.Init();
+            //BattleManger.Instance.waitForPlayers.SetActive(false);
+            //BattleManger.Instance.playersInGame.Add(playerInformation);
+            ////start battle
+            //BattleManger.Instance.Init();
+
+
+
+            //call battle manageer to update UI on player 2 when connect
+            BattleManger.Instance.StartBattleWhenPlayersConnect();
         }
 
 
@@ -182,21 +187,22 @@ public class CreatePlayers : Photon.PunBehaviour {
 
         //Debug.Log("OnPhotonPlayerConnected: " + PhotonNetwork.room.playerCount + ". -> " + newPlayer.name + " : " + newPlayer.isMasterClient);
 
-        PlayerInformation playerInformation;
-        playerInformation = PlayerInformation.Instance;
+        //PlayerInformation playerInformation;
+        //playerInformation = PlayerInformation.Instance;
 
 
         if (PhotonNetwork.room.playerCount == 2)
         {
-            BattleManger.Instance.playersInGame.Add(playerInformation);
+            //BattleManger.Instance.playersInGame.Add(playerInformation);
 
-            BattleManger.Instance.waitForPlayers.SetActive(false);
-
-
-            //start battle
-            BattleManger.Instance.Init();
+            //BattleManger.Instance.waitForPlayers.SetActive(false);
 
 
+            ////start battle
+            //BattleManger.Instance.Init();
+
+            BattleManger.Instance.StartBattleWhenPlayersConnect();
+            //call battle manageer to update UI on player 1 when player 2 connect
         }
     }
 
@@ -206,8 +212,7 @@ public class CreatePlayers : Photon.PunBehaviour {
     {
         //base.OnLeftRoom();
 
-        //save stats and check if battle is over, then 
-
+        
         PhotonNetwork.LoadLevel("MainMenu01");
     }
 

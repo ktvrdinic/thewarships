@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -760,6 +760,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 258253169}
   m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &258253175 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114412093861195932, guid: a77350aef0ce7424e979485975535f67,
+    type: 2}
+  m_PrefabInternal: {fileID: 258253169}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &297976789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1880,7 +1886,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &905134433
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1912,14 +1918,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3531061, g: 0.39418605, b: 0.6509434, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1bdfbf15f6abec34e9bb38e2d81fcc84, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 982245b4e9da2ae4cac0cdad25a008ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3504,6 +3510,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1825240097}
   m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &1825240103 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114412093861195932, guid: a77350aef0ce7424e979485975535f67,
+    type: 2}
+  m_PrefabInternal: {fileID: 1825240097}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1897136892
 Prefab:
   m_ObjectHideFlags: 0
@@ -3614,18 +3626,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerNameText: {fileID: 258253172}
   PlayerHealthText: {fileID: 258253171}
+  PlayerLevelText: {fileID: 258253175}
   PlayerRankImage: {fileID: 258253173}
   PlayerHealthSlider: {fileID: 258253174}
   EnemyNameText: {fileID: 1825240100}
   EnemyHealthText: {fileID: 1825240099}
+  EnemyLevelText: {fileID: 1825240103}
   EnemyRankImage: {fileID: 1825240101}
   EnemyHealthSlider: {fileID: 1825240102}
+  loser: 
   waitForPlayers: {fileID: 905134432}
-  rankImages: []
+  rankImages:
+  - {fileID: 21300000, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
+  - {fileID: 21300002, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
+  - {fileID: 21300004, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
+  - {fileID: 21300006, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
+  - {fileID: 21300008, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
+  - {fileID: 21300010, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
+  - {fileID: 21300012, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
+  - {fileID: 21300014, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
+  - {fileID: 21300016, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
+  - {fileID: 21300018, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
+  - {fileID: 21300020, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
+  - {fileID: 21300022, guid: 5ec7d04583ec0454ebc44d4be6b55461, type: 3}
   playersInGame: []
   winPanel: {fileID: 860030779}
   losePanel: {fileID: 297976789}
   PlayersUI: {fileID: 908664102}
+  maxHealthPlayer: 0
+  maxHealthEnemy: 0
   winner: 
 --- !u!1 &2058963269
 GameObject:

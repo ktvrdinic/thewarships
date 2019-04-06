@@ -1,25 +1,32 @@
 <?php
 	require ('inc_conn.php');
 	
-	if(isset($_POST["username_enemy"])){
+	if(isset($_POST["usernameWin"])){
 		// Dodati varijable koje bi spremili
-		$username = mysqli_real_escape_string($conn, $_POST["username"]);
-		$username_enemy = mysqli_real_escape_string($conn, $_POST["username_enemy"]);
+		$usernameWin = mysqli_real_escape_string($conn, $_POST["usernameWin"]);
+		$usernameLose = mysqli_real_escape_string($conn, $_POST["usernameLose"]);
+
 		// Mogao bi se koristiti switch za razlicita spremanja podataka
 		$stmt = $conn->prepare("INSERT INTO bitka(username1, username2, winner) VALUES (?,?,0)");
-		$stmt->bind_param("ss", $username, $username_enemy);
+		$stmt->bind_param("ss", $usernameWin, $usernameLose);
 		$stmt->execute() or die("4: Insert player query failed");
 		
 		$stmt2 = $conn->prepare("UPDATE `users` SET `no_victory` = `no_victory` + 1 WHERE username like ?;");
+		$stmt2->bind_param("s", $usernameWin);
+		$stmt2->execute() or die("10: Insert player win statistics");
+
 		$stmt1 = $conn->prepare("UPDATE `users` SET `no_lose` = `no_lose` + 1 WHERE username like ?;");
+		$stmt1->bind_param("s", $usernameLose);
+		$stmt1->execute() or die("10: Insert player lose statistics");	
+
+		$stmt3 = $conn->prepare("UPDATE `users` SET `gold` = `gold` + 200, `rum` = `rum` + 150, `wood` = `wood` + 140, `experience` = `experience` + 10  WHERE `username` LIKE ?;");
+		$stmt3->bind_param("s", $usernameWin);
+		$stmt3->execute() or die("11: Update player win resource");
 		
-		$stmt2->bind_param("s", $username);
-		$stmt1->bind_param("s", $username_enemy);
-		$stmt2->execute() or die("10: Insert player statistics");
-		$stmt1->execute() or die("10: Insert player statistics");	
 		
 		$stmt1->close();
 		$stmt2->close();
+		$stmt3->close();
 		$stmt->close();
 		
 		echo "0";
@@ -67,5 +74,3 @@
 		echo "0";
 	}
 ?>
-
-

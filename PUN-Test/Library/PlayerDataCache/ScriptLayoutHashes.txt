@@ -149,7 +149,7 @@ bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.Audi
 c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingCollider
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.SpatialMappingRenderer
 574c64e43cb56ec8c7d7af74589a251f Assembly-CSharp.dll:.RPGCamera
-1d56dc252e68625531e2b5f3c3e6fbad Assembly-CSharp.dll:.BattleManger
+5dfe0a1e7ad20bac15332d52245cbb17 Assembly-CSharp.dll:.BattleManger
 97b1bbbb88ca7f015c628923e0303836 Assembly-CSharp.dll:.ShipTilt
 e626bae268f8b272b7a2d07760d262c6 Assembly-CSharp.dll:.PickupController
 81b3ee5182065a2d4babbb973ed19ace Assembly-CSharp.dll:.InGameControls
@@ -191,7 +191,7 @@ e9bdabf9265d758d56f01bb188916fa8 UnityEngine.Networking.dll:UnityEngine.Networki
 2c62b9ae79b8b54dd7b55fa7d311452b Assembly-CSharp-firstpass.dll:UnityStandardAssets.Water.Water
 19a37a59d9318ce8dfc2cbf6c51fbd0f Assembly-CSharp.dll:.ShipBobble
 173a033cde910692227c728d6b89fedd Assembly-CSharp.dll:.OnClickCallMethod
-097a63bed5842b793007bd3eb1366097 Assembly-CSharp.dll:.GameShip
+53e7ccc5498b719f7e971d58d4b768f9 Assembly-CSharp.dll:.GameShip
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 f02726adeff0a3ec5905565234b372da UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
@@ -236,4 +236,4 @@ d1755adc44fcb9e44c42a5889d35f7a0 Assembly-CSharp.dll:.MoveByKeys
 19a37a59d9318ce8dfc2cbf6c51fbd0f Assembly-CSharp.dll:.ShipTrail
 71ab2458ec019ad449775522d3c59587 Assembly-CSharp.dll:.ShipyardBuyScript
 003ec814368efa6040da87206e615f81 Assembly-CSharp.dll:.ImageFade
-66c2048299fff65a965e0d3d8fad0daf Assembly-CSharp.dll:.Cannon
+6534669081b469fbdf5358b45cc2c3d1 Assembly-CSharp.dll:.Cannon

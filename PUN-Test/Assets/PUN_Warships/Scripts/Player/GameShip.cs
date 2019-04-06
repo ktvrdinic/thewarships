@@ -21,6 +21,9 @@ public class GameShip : MonoBehaviour
 	// Current and maximum sail health
 	public Vector2 sailHealth = new Vector2(100f, 100f);
 
+    public float ShipHealth;
+    public int Ship_singleCannonDmg = 1;
+
 	Vector3 mLastPos;
 	Vector3 mVelocity;
 
@@ -74,12 +77,14 @@ public class GameShip : MonoBehaviour
 	{
 
 		if (val < 0f) val = 0f;
-		val *= (1.0f - sailDamageReduction);
-		val = Mathf.Min(sailHealth.x, val);
-		sailHealth.x -= val;
+		//val *= (1.0f - sailDamageReduction);
+		//val = Mathf.Min(sailHealth.x, val);
+		//sailHealth.x -= val;
+
+        ShipHealth -= val;
 		
 
-        if (sailHealth.x == 0 && !isDead)
+        if (ShipHealth == 0 && !isDead)
         {
             //dead
             isDead = true;
