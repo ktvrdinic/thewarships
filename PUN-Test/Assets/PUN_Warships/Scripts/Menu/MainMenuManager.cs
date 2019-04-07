@@ -223,6 +223,7 @@ public class MainMenuManager : MonoBehaviour {
             // playerInformation.no_victory = DBManager.no_victory
             DBManager.no_lose = int.Parse(temp[8]);
             UpdateResources();
+            updateMainMenu();
             // playerInformation.no_lose = DBManager.no_lose;
             // gold[1], rum[2], wood[3], pearl[4], experience[5], level[6], no_victory[7], no_lose[8]
         }
@@ -415,6 +416,9 @@ public class MainMenuManager : MonoBehaviour {
 		rumPanel.text = playerInformation.rum.ToString();
 		goldPanel.text = playerInformation.gold.ToString();
 		diamondPanel.text = playerInformation.pearl.ToString();
+
+
+        
 
 	}
 

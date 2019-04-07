@@ -394,6 +394,7 @@
     <Compile Include="Assets\PUN_Warships\Models\Island\Scripts\WaterScroller.cs" />
     <Compile Include="Assets\PUN_Warships\Scripts\Classes\Classes.cs" />
     <Compile Include="Assets\PUN_Warships\Scripts\IO\IO.cs" />
+    <Compile Include="Assets\PUN_Warships\Scripts\Menu\AudioManager.cs" />
     <Compile Include="Assets\PUN_Warships\Scripts\Menu\ImageFade.cs" />
     <Compile Include="Assets\PUN_Warships\Scripts\Menu\MainMenuManager.cs" />
     <Compile Include="Assets\PUN_Warships\Scripts\Menu\ShipyardBuyScript.cs" />

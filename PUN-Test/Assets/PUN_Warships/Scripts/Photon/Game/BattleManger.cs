@@ -273,12 +273,14 @@ public class BattleManger : Photon.MonoBehaviour {
         yield return new WaitForSeconds(time);
         UpdatePlayerUI();
 
-        StartCoroutine(CloseWaitForPlayersPanel());
+        yield return StartCoroutine(CloseWaitForPlayersPanel());
     }
 
      IEnumerator CloseWaitForPlayersPanel()
     {
+        UpdatePlayerUI();
         yield return new WaitForSeconds(2f);
+        UpdatePlayerUI();
         waitForPlayers.SetActive(false);
     }
 }

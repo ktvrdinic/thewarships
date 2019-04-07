@@ -113,7 +113,7 @@ public class CreatePlayers : Photon.PunBehaviour {
         string ShipName;
         if (playerInformation == null)
         {
-            ShipName = "Ships/Cartoon/Ship of the line";
+            ShipName = "Ships/Cartoon/Brig";
         }
         else
         {
