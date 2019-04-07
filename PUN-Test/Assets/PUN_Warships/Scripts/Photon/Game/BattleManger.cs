@@ -148,7 +148,7 @@ public class BattleManger : Photon.MonoBehaviour {
             }
         }
 
-        Debug.Log("Insert winner mYSQL Username: " + DBManager.username + ", enemy: " + BattleManger.Instance.EnemyNameText.text);
+        //Debug.Log("Insert winner mYSQL Username: " + DBManager.username + ", enemy: " + BattleManger.Instance.EnemyNameText.text);
 
         form.AddField("usernameWin", winner);
         form.AddField("usernameLose", loser); // Dodati neprijatelja
@@ -167,6 +167,7 @@ public class BattleManger : Photon.MonoBehaviour {
             Debug.Log("Battle creation failed in MySQL. Error #" + www.text);
         }
     }
+
 
     public void Init()
     {

@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-C:/Users/MS Studio/Documents/Unity Projects/DIPRI/PUN-Test/Build/Build.exe
+C:/Users/Developer/Desktop/theWarshipsGit/thewarships/PUN-Test/PUN-Test.exe
 SceneListBegin?
 Assets/Scenes/LoginScene.unity
 Assets/Scenes/RegisterScene.unity
@@ -158,6 +158,7 @@ e626bae268f8b272b7a2d07760d262c6 Assembly-CSharp.dll:.PickupController
 a988ca30807f46a6261e2e3363f14727 Assembly-CSharp.dll:.CannonsRotate
 4ce2b1853c9a392b036a6a654be90ccb Assembly-CSharp.dll:.OnClickInstantiate
 a7a85e3660316548e6df72942099a49d Assembly-CSharp.dll:.MessageOverlay
+e887fb50f00ebb0020099be95da0dbdc Assembly-CSharp.dll:.AudioManager
 a86df7a13f2d705d2bd0c1a99cc4d20f Assembly-CSharp.dll:.CreatePlayers
 2165accb3ea2740b87b88a727c43d0b3 Assembly-CSharp.dll:.PickupDemoGui
 090584907af2e462994cc893ced507b3 Assembly-CSharp.dll:.PhotonRigidbodyView
@@ -207,7 +208,7 @@ e0f7ffd5d5c2abe4b2e16569a21163da UnityEngine.GoogleAudioSpatializer.dll:UnityEng
 67a5f2c97205d2e41a8ed7c7ce898f6e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 febb860c81dce3b7f633ebf56de24419 Assembly-CSharp.dll:.IdleRunJump
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Demo2DJumpAndRun
-1caaec9fa4270c0c77ac2c25512b6bfb Assembly-CSharp.dll:.MainMenuManager
+85113f5c05f148bdcaef1a3ee0abcf60 Assembly-CSharp.dll:.MainMenuManager
 bc68edb0af574bf79f9550ead8ebae5c UnityEngine.HoloLens.dll:UnityEngine.Audio.AudioSpatializerMicrosoft
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInput
 463516d5b5fe8e67a0a24c48f2095b04 UnityEngine.HoloLens.dll:UnityEngine.EventSystems.HoloLensInputModule

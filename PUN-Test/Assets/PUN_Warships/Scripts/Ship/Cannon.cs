@@ -2,7 +2,7 @@
 //using Photon.Pun;
 //using Photon.Realtime;
 
-
+[RequireComponent(typeof(AudioSource))]
 public class Cannon : MonoBehaviour
 {
 	// Cannonball prefab
@@ -58,13 +58,23 @@ public class Cannon : MonoBehaviour
 		return Mathf.Cos(Mathf.Deg2Rad * maxPitch) * initialVelocity * time;
 	}
 
-	/// <summary>
-	/// Cache the transform and the ship controlling this cannon.
-	/// </summary>
+    /// <summary>
+    /// Cache the transform and the ship controlling this cannon.
+    /// </summary>
+    private AudioSource audioSource;
 
 	void Start ()
 	{
-		mTrans = transform;
+        if (!GetComponent<AudioSource>())
+        {
+            gameObject.AddComponent<AudioSource>();
+            audioSource = GetComponent<AudioSource>();
+        }
+        else
+        {
+            audioSource = GetComponent<AudioSource>();
+        }
+        mTrans = transform;
 		mStats = GameShip.Find(mTrans);
 
         initialVelocity = 45;
@@ -171,7 +181,7 @@ public class Cannon : MonoBehaviour
 	{
 		float time = Time.time;
 
-		if (mRechargeTime < time && mFireTime == 0f)
+        if (mRechargeTime < time && mFireTime == 0f)
 		{
 			Vector3 cannonDir = mTrans.rotation * Vector3.forward;
 
@@ -182,7 +192,11 @@ public class Cannon : MonoBehaviour
 				mFireTime = time + Random.value * reactionTime;
 				mFiringDir = dir;
 				mFiringPitch = Mathf.Clamp01(distance / mMaxRange) * maxPitch;
-			}
-		}
+
+                audioSource.clip = AudioManager.Instance.audioClips[0];
+                audioSource.Play();
+
+            }
+        }
 	}
 }

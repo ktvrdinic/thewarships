@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 public class ShipController : MonoBehaviour
 {
+
     // Whether this ship is controlled by player input
     public bool controlledByInput = false;
 
@@ -79,6 +80,7 @@ public class ShipController : MonoBehaviour
     public BoxCollider boxCollider;
     void Start()
     {
+
         mTrans = transform;
         mStats = GetComponent<GameShip>();
         //mCannons = GetComponentsInChildren<Cannon>();
@@ -349,7 +351,7 @@ public class ShipController : MonoBehaviour
                     cannon.Fire(dir, distance);
                 }
             }
-
+           
         }
     }
 

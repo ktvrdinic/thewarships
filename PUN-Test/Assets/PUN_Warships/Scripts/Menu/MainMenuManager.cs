@@ -31,8 +31,7 @@ public class MainMenuManager : MonoBehaviour {
 
     public List<Sprite> rankImages;
 
-
-
+    public AudioSource audio_source;
 
 
     public PlayerInformation playerInformation;
@@ -171,7 +170,7 @@ public class MainMenuManager : MonoBehaviour {
         StartCoroutine(RefreshResources());
 
         CloseAllPanels();
-		UpdateResources();
+		//UpdateResources();
 		//OpenPanel(MainMenu);
 
 		updateMainMenu();
@@ -193,7 +192,47 @@ public class MainMenuManager : MonoBehaviour {
 
 	}
 
-	void CreateAllShips(){
+    IEnumerator RefreshResources()
+    {
+        WWWForm form = new WWWForm();
+
+        form.AddField("username", DBManager.username);
+
+        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/fetchUser.php", form);
+
+        yield return www;
+
+        if (www.text[0] == '0')
+        {
+            string[] temp = www.text.Split('_');
+
+            Debug.Log("Resources are fetched. Resources: " + temp[1] + ", " + temp[2] + ", " + temp[3] + ", " + temp[4] + ", " + temp[5] + ", " + temp[6] + ", " + temp[7] + ", " + temp[8]);
+            DBManager.gold = int.Parse(temp[1]);
+            playerInformation.gold = int.Parse(temp[1]);
+            DBManager.rum = int.Parse(temp[2]);
+            playerInformation.rum = int.Parse(temp[2]);
+            DBManager.wood = int.Parse(temp[3]);
+            playerInformation.wood = int.Parse(temp[3]);
+            DBManager.pearl = int.Parse(temp[4]);
+            playerInformation.pearl = int.Parse(temp[4]);
+            DBManager.experience = int.Parse(temp[5]);
+            playerInformation.experience = int.Parse(temp[5]);
+            DBManager.level = int.Parse(temp[6]);
+            playerInformation.level = int.Parse(temp[6]);
+            DBManager.no_victory = int.Parse(temp[7]);
+            // playerInformation.no_victory = DBManager.no_victory
+            DBManager.no_lose = int.Parse(temp[8]);
+            UpdateResources();
+            // playerInformation.no_lose = DBManager.no_lose;
+            // gold[1], rum[2], wood[3], pearl[4], experience[5], level[6], no_victory[7], no_lose[8]
+        }
+        else
+        {
+            Debug.Log("Resources aren't fetched. Error # " + www.text);
+        }
+    }
+
+    void CreateAllShips(){
 		shipyardShips = new List<Ship>();
 		shipyardShips.Add(new Ship("Brig", 1, 15, 25, 350, 10, 8));
 		shipyardShips.Add(new Ship("Carrack", 2, 15, 20, 420, 10, 8));
@@ -214,7 +253,7 @@ public class MainMenuManager : MonoBehaviour {
         {
             if(s.tier == shipyardShips[i].tier) return;
         }
-     ////   if (playerInformation.listOfShips.Contains(new Ship { tier = shipyardShips[i].tier})) return;
+     //   if (playerInformation.listOfShips.Contains(new Ship { tier = shipyardShips[i].tier})) return;
 
         PayWithResources(wood, 0);
         PayWithResources(rum, 1);
@@ -224,6 +263,7 @@ public class MainMenuManager : MonoBehaviour {
         playerInformation.Add_to_shipList(shipyardShips[i]);
         UpdateResources();
         StartCoroutine(ShipInsert(i));
+        audio_source.Play();
     }
 
     IEnumerator ShipInsert(int i)
@@ -411,8 +451,9 @@ public class MainMenuManager : MonoBehaviour {
 
 		if(!PlayerHasEnoughResourcesToBuy(100, 2)) return; // price 100 gold for upgrade
 		PayWithResources(100, 2);
+        audio_source.Play();
 
-		Ship ship = playerInformation.listOfShips[playerInformation.currentShipSelected];
+        Ship ship = playerInformation.listOfShips[playerInformation.currentShipSelected];
 		if(ship.shipSkills[currentSkillSelected] < 10)
 			ship.shipSkills[currentSkillSelected]++;
 		else
@@ -583,55 +624,15 @@ public class MainMenuManager : MonoBehaviour {
 		updateMainMenu();
 	}
 
-    IEnumerator RefreshResources()
-    {
-        WWWForm form = new WWWForm();
-
-        form.AddField("username", DBManager.username);
-
-        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/fetchUser.php", form);
-
-        yield return www;
-
-        if (www.text[0] == '0')
-        {
-            string[] temp = www.text.Split('_');
-
-            Debug.Log("Resources are fetched. Resources: " + temp[1] + ", " + temp[2] + ", " + temp[3] + ", " + temp[4] + ", " + temp[5] + ", " + temp[6] + ", " + temp[7] + ", " + temp[8]);
-            DBManager.gold = int.Parse(temp[1]);
-            playerInformation.gold = DBManager.gold;
-            DBManager.rum = int.Parse(temp[2]);
-            playerInformation.rum = DBManager.rum;
-            DBManager.wood = int.Parse(temp[3]);
-            playerInformation.wood = DBManager.wood;
-            DBManager.pearl = int.Parse(temp[4]);
-            playerInformation.pearl = DBManager.pearl;
-            DBManager.experience = int.Parse(temp[5]);
-            playerInformation.experience = DBManager.experience;
-            DBManager.level = int.Parse(temp[6]);
-            playerInformation.level = DBManager.level;
-            DBManager.no_victory = int.Parse(temp[7]);
-            // playerInformation.no_victory = DBManager.no_victory
-            DBManager.no_lose = int.Parse(temp[8]);
-            // playerInformation.no_lose = DBManager.no_lose;
-            // gold[1], rum[2], wood[3], pearl[4], experience[5], level[6], no_victory[7], no_lose[8]
-            UpdateResources();
-        }
-        else
-        {
-            Debug.Log("Resources aren't fetched. Error # " + www.text);
-
-        }
-
-    }
+    
 
 
     void Start () 
 	{
         //GenerateListOfShipsButtons(playerInformation);
-        playerInformation = PlayerInformation.Instance;    
+        playerInformation = PlayerInformation.Instance;
 
-		Init();
+        Init();
 
 
 	}

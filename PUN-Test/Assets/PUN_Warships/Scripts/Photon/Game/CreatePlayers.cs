@@ -218,10 +218,8 @@ public class CreatePlayers : Photon.PunBehaviour {
 
     public void LeaveBattle()
     {
-        PhotonNetwork.LeaveRoom();
-        
+        PhotonNetwork.LeaveRoom();        
     }
 
-
-
+    
 }
