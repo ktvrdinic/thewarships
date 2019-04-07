@@ -1,7 +1,11 @@
+<<<<<<< Updated upstream
 Base path: C:/Program Files/Unity/Editor/Data
 Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler
+=======
+Base path: C:/Program Files/Unity2018.1.6f.1/Editor/Data
+>>>>>>> Stashed changes
 Cmd: initializeCompiler
 Cmd: initializeCompiler
 Cmd: initializeCompiler
