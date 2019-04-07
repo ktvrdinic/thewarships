@@ -28,7 +28,7 @@ public class CreatePlayers : Photon.PunBehaviour {
             PhotonNetwork.JoinRandomRoom();
         }
 
-        PhotonNetwork.sendRate = 60;
+        PhotonNetwork.sendRate = 30;
         PhotonNetwork.sendRateOnSerialize = 30;
 
         //CratePlayerObjects();

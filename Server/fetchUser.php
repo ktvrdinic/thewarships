@@ -14,6 +14,6 @@
         $existinginfo = $rezultat->fetch_assoc();
         $stmt->close();
         
-        echo "0_".$existinginfo["wood"]."_".$existinginfo["rum"]."_".$existinginfo["gold"]."_".$existinginfo["pearl"]."_".$existinginfo["experience"]."_".$existinginfo["level"]."_".$existinginfo["no_victory"]."_".$existinginfo["no_lose"];
+        echo "0_".$existinginfo["gold"]."_".$existinginfo["rum"]."_".$existinginfo["wood"]."_".$existinginfo["pearl"]."_".$existinginfo["experience"]."_".$existinginfo["level"]."_".$existinginfo["no_victory"]."_".$existinginfo["no_lose"];
     }    
 ?>

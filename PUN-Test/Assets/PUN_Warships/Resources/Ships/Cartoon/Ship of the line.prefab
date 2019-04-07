@@ -1657,6 +1657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -1688,6 +1689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -1709,7 +1711,7 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 0
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 4
+    InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 8
     InterpolateLerpSpeed: 1
     InterpolateMoveTowardsAcceleration: 2
@@ -1784,6 +1786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -1803,6 +1806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -1822,6 +1826,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -1841,6 +1846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -1873,6 +1879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -1892,6 +1899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -1911,6 +1919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -1930,6 +1939,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -1949,6 +1959,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2059,6 +2070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2103,6 +2115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2122,6 +2135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2145,6 +2159,8 @@ MonoBehaviour:
   maxTurningSpeed: 20
   sailDamageReduction: 0
   sailHealth: {x: 100, y: 100}
+  ShipHealth: 0
+  Ship_singleCannonDmg: 1
 --- !u!114 &114610797316346312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2158,6 +2174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2177,6 +2194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2196,6 +2214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2215,6 +2234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2246,6 +2266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2265,6 +2286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2284,6 +2306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2303,6 +2326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2401,6 +2425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2420,6 +2445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2439,6 +2465,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2458,6 +2485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2477,6 +2505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2496,6 +2525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2515,6 +2545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45
@@ -2534,6 +2565,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cannonballPrefab: {fileID: 1340284980568170, guid: aeba07b72f101bf42a806c32100c2e38,
     type: 2}
+  CannonBallDmg: 1
   initialVelocity: 15
   maxPitch: 25
   maxYaw: 45

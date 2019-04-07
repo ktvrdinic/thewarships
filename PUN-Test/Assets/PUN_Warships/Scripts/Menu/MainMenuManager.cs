@@ -615,11 +615,14 @@ public class MainMenuManager : MonoBehaviour {
             DBManager.no_lose = int.Parse(temp[8]);
             // playerInformation.no_lose = DBManager.no_lose;
             // gold[1], rum[2], wood[3], pearl[4], experience[5], level[6], no_victory[7], no_lose[8]
+            UpdateResources();
         }
         else
         {
             Debug.Log("Resources aren't fetched. Error # " + www.text);
+
         }
+
     }
 
 
