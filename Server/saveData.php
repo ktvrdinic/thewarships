@@ -11,22 +11,16 @@
 		$stmt->bind_param("ss", $usernameWin, $usernameLose);
 		$stmt->execute() or die("4: Insert player query failed");
 		
-		$stmt2 = $conn->prepare("UPDATE `users` SET `no_victory` = `no_victory` + 1 WHERE username like ?;");
+		$stmt2 = $conn->prepare("UPDATE `users` SET `gold` = `gold` + 200, `rum` = `rum` + 150, `wood` = `wood` + 140, `experience` = `experience` + 10, `no_victory` = `no_victory` + 1 WHERE username like ?;");
 		$stmt2->bind_param("s", $usernameWin);
 		$stmt2->execute() or die("10: Insert player win statistics");
 
 		$stmt1 = $conn->prepare("UPDATE `users` SET `no_lose` = `no_lose` + 1 WHERE username like ?;");
 		$stmt1->bind_param("s", $usernameLose);
-		$stmt1->execute() or die("10: Insert player lose statistics");	
-
-		$stmt3 = $conn->prepare("UPDATE `users` SET `gold` = `gold` + 200, `rum` = `rum` + 150, `wood` = `wood` + 140, `experience` = `experience` + 10  WHERE `username` LIKE ?;");
-		$stmt3->bind_param("s", $usernameWin);
-		$stmt3->execute() or die("11: Update player win resource");
-		
+		$stmt1->execute() or die("10: Insert player lose statistics");			
 		
 		$stmt1->close();
 		$stmt2->close();
-		$stmt3->close();
 		$stmt->close();
 		
 		echo "0";
