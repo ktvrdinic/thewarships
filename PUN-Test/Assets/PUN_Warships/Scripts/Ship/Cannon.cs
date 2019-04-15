@@ -77,9 +77,9 @@ public class Cannon : MonoBehaviour
         mTrans = transform;
 		mStats = GameShip.Find(mTrans);
 
-        initialVelocity = 45;
-        maxPitch = 10;
-        maxAimDeviationAngle = 2;
+        initialVelocity = 60;
+        maxPitch = 5;
+        maxAimDeviationAngle = 1;
 
         // Calculate the cannon's maximum range
         mMaxRange = CalculateMaxRange();

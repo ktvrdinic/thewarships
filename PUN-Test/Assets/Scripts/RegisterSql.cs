@@ -25,7 +25,7 @@ public class RegisterSql : MonoBehaviour {
         form.AddField("email", emailField.text);
         form.AddField("password", passwordField.text);
 
-        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/register.php", form);
+        WWW www = new WWW("https://jugoslavian-holes.000webhostapp.com/register.php", form);
 
         yield return www;
 

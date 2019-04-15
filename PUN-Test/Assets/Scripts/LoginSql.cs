@@ -51,7 +51,7 @@ public class LoginSql : MonoBehaviour
         form.AddField("name", usernameField.text);
         form.AddField("password", passwordField.text);
 
-        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/login.php", form);
+        WWW www = new WWW("https://jugoslavian-holes.000webhostapp.com/login.php", form);
 
         yield return www;
 

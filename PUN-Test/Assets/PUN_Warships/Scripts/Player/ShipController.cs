@@ -186,6 +186,7 @@ public class ShipController : MonoBehaviour
 
         BattleManger.Instance.players.Insert(1, player);
 
+        BattleManger.Instance.UpdatePlayerUI();
 
         ///BattleManger.Instance.ships.Add(player.listOfShips[player.currentShipSelected]);
     }
@@ -368,6 +369,13 @@ public class ShipController : MonoBehaviour
             ///////photonView.RPC("ApplyDamageToSails", RpcTarget.All, cb.damage);
             Debug.Log("Damage: "+ damage);
 
+
+            if(photonView.isMine)
+            {
+                GameObject newBoomEffect = PhotonNetwork.Instantiate("Boom", transform.position, Quaternion.identity, 0);
+                //destroy it
+            }
+
             //TextUPdate
             BattleManger.Instance.PlayerHealthText.text = mStats.ShipHealth.ToString() + "/" + BattleManger.Instance.maxHealthPlayer;
             BattleManger.Instance.PlayerHealthSlider.value = mStats.ShipHealth;
@@ -390,7 +398,7 @@ public class ShipController : MonoBehaviour
                 ///Debug.LogError("OnCollisionEnter.Winner is " + BattleManger.Instance.winner + " : MasterClient" + PhotonNetwork.isMasterClient);
             }
 
-            //// cb.DestroyOnHit();
+            // cb.DestroyOnHit();
 
 
 

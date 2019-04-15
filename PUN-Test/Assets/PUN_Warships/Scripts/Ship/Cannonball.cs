@@ -7,7 +7,7 @@ public class Cannonball : Photon.MonoBehaviour
 {
 	// How much damage is applied on hit
 	public float damage = 5f;
-
+    public ParticleSystem particleExplosion;
 	// Particle emitter that will be creating a smoke trail behind the cannonball
 	public ParticleEmitter smokeEmitter;
 
@@ -63,6 +63,31 @@ public class Cannonball : Photon.MonoBehaviour
             //mRb.velocity = Vector3.zero;
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        ShipController cb = collision.gameObject.GetComponent<ShipController>();
+
+
+        if (cb != null && photonView.isMine)
+        {
+            PhotonNetwork.Destroy(this.gameObject);
+
+            //StartCoroutine(DestroyAfterTime(1f));
+            
+        }
+            
+    }
+
+    //IEnumerator DestroyAfterTime(float time)
+    //{
+    //    particleExplosion.Play();
+    //    gameObject.GetComponentInChildren<SphereCollider>().gameObject.SetActive(false);
+    //    gameObject.GetComponentInChildren<SphereCollider>().gameObject;
+
+    //    yield return new WaitForSeconds(time);
+    //    PhotonNetwork.Destroy(this.gameObject);
+    //}
 
 
 

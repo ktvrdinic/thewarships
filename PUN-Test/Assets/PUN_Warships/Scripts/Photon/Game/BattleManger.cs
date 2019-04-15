@@ -110,6 +110,14 @@ public class BattleManger : Photon.MonoBehaviour {
             Debug.LogError("Winner is :" + winner);
         }
 
+
+/*
+        if(PhotonNetwork.room.playerCount == 2 && PlayerNameText.text == EnemyNameText.text && waitForPlayers.activeInHierarchy)
+        {
+            if(players.Count == 2 && players[0].playerName != "" && players[1].playerName != "")
+                UpdatePlayerUI();
+        }
+*/
         /*if (PhotonNetwork.room.playerCount == 2)
         {
             if (firstCall)
@@ -148,13 +156,13 @@ public class BattleManger : Photon.MonoBehaviour {
             }
         }
 
-        //Debug.Log("Insert winner mYSQL Username: " + DBManager.username + ", enemy: " + BattleManger.Instance.EnemyNameText.text);
+        Debug.Log("Insert winner mYSQL Username: " + winner + ", loser Username: " + loser);
 
         form.AddField("usernameWin", winner);
         form.AddField("usernameLose", loser); // Dodati neprijatelja
         
 
-        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/saveData.php", form);
+        WWW www = new WWW("https://jugoslavian-holes.000webhostapp.com/saveData.php", form);
 
         yield return www;
 
@@ -231,12 +239,12 @@ public class BattleManger : Photon.MonoBehaviour {
 
     public int maxHealthPlayer, maxHealthEnemy;
 
-    void UpdatePlayerUI()
+    public void UpdatePlayerUI()
     {
-        foreach (PlayerInBattle p in players)
+        /*foreach (PlayerInBattle p in players)
         {
             Debug.LogError("UpdatePlyersUI : " + p.playerName + " : " + p.level + " : " + p.shipName + " : " + p.strength);
-        }
+        }*/
 
         if (players[0].playerName == null && players[1].playerName == null && PhotonNetwork.room.playerCount != 2) return;
 
@@ -279,9 +287,13 @@ public class BattleManger : Photon.MonoBehaviour {
      IEnumerator CloseWaitForPlayersPanel()
     {
         UpdatePlayerUI();
+
         yield return new WaitForSeconds(2f);
         UpdatePlayerUI();
         waitForPlayers.SetActive(false);
+        UpdatePlayerUI();
     }
+
+
 }
 

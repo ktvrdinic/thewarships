@@ -198,7 +198,7 @@ public class MainMenuManager : MonoBehaviour {
 
         form.AddField("username", DBManager.username);
 
-        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/fetchUser.php", form);
+        WWW www = new WWW("https://jugoslavian-holes.000webhostapp.com/fetchUser.php", form);
 
         yield return www;
 
@@ -278,7 +278,7 @@ public class MainMenuManager : MonoBehaviour {
         form.AddField("wood", playerInformation.wood);
         form.AddField("pearl", playerInformation.pearl);
 
-        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/saveData.php", form);
+        WWW www = new WWW("https://jugoslavian-holes.000webhostapp.com/saveData.php", form);
 
         yield return www;
 
@@ -314,7 +314,7 @@ public class MainMenuManager : MonoBehaviour {
         form.AddField("wood", playerInformation.wood);
         form.AddField("pearl", playerInformation.pearl);
 
-        WWW www = new WWW("https://testwebsitecro.000webhostapp.com/saveData.php", form);
+        WWW www = new WWW("https://jugoslavian-holes.000webhostapp.com/saveData.php", form);
 
         yield return www;
 
