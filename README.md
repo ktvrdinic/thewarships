@@ -1,4 +1,3 @@
 # The Warships
 
-
-We develope this MMO game in this repository, every help is welcome.
+The Warships is a multiplayer game developed using Unity and Photon Engine for networking
